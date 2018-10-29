@@ -14,3 +14,7 @@ get contig counts and stats from a multi-fasta file
 **NLRparser_txt2bed.py**
 
 convert NLR-parser (https://github.com/steuernb/NLR-Parser) txt output to bed
+
+**contig_namer.py**
+
+rename and enumerate sequences in a multi-fasta file
