@@ -9,7 +9,7 @@ def main():
     # Parse arguments.
     parser = argparse.ArgumentParser(description='get contig counts and stats from a multi-fasta file')
     parser.add_argument('-i', '--input', help='indicate input fasta', required=True)
-    parser.add_argument('-s', '--show', help='indicate True to print length of each contig', required=False)
+    parser.add_argument('-s', '--show', help='print id of each contig above this length. Indicate min length', type=int, required=False)
     parser.add_argument('-b', '--bins', help='indicate True to print binned contig lengths', required=False)
     args = parser.parse_args()
     
@@ -18,7 +18,7 @@ def main():
     p = re.compile('(>.+\n)|\W')
     N = re.compile('[nN]')
     Ns = 0
-    if args.show in ['T', 't', 'True', 'true', 'TRUE']:
+    if args.show:
         show = True
     else:
         show = False
@@ -36,9 +36,9 @@ def main():
 	for line in fastaIn:
     	    if line.startswith('>'):
                 seqLen = len(tempSeq)
-                if show:
+                if show and seqLen >= args.show:
                     print(ctgid.strip('>') + '\t' + str(seqLen))
-                    ctgid = line.strip('\n')
+                ctgid = line.strip('\n')
                 if bins:
                     i = 0
                     while i < 12:
@@ -53,7 +53,7 @@ def main():
                 tempSeq += p.sub('', line)
     	ctgLens.append(len(tempSeq))
         Ns += len(N.findall(tempSeq))
-        if show:
+        if show and seqLen >= args.show:
             print(ctgid.strip('>') + '\t' + str(len(tempSeq)) + '\n')
         if bins:
             i = 0
