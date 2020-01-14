@@ -18,3 +18,8 @@ convert NLR-parser (https://github.com/steuernb/NLR-Parser) txt output to bed
 **contig_namer.py**
 
 rename and enumerate sequences in a multi-fasta file
+
+**BWA_SAM_edit_dist_filter.py**
+
+maximum edit distance option (-n) for BWA (last tried with v0.7.17) does not seem to work. Use this tool instead to filter reads by edit distance from SAM output of BWA (may not work for other aligners due to differences in SAM format). BWA output can be piped directly through for samtools processing. For example: 
+```bwa sampe reference.fasta aln1.sai aln2.sai reads1.fq.gz reads2.fq.gz | python BWA_SAM_edit_dist_filter.py -n 2 | samtools view -hub -o output.bam - ```
