@@ -82,20 +82,28 @@ def main():
     len75 = len25*3
     N75 = ''
     rollSum = 0
+    countL = 0
+    L25 = ''
+    L50 = ''
+    L75 = ''
     for num in ctgLens:
         rollSum += num
+        countL += 1
         if check25 == False and rollSum >= len25:
             N25 = str(num)
+            L25 = str(countL)
             check25 = True
         if check50 == False and rollSum >= len50:
             N50 = str(num)
+            L50 = str(countL)
             check50 = True
         if rollSum >= len75:
             N75 = str(num)
+            L75 = str(countL)
             break
 
 
-    print('for ' + args.input + ':\nnumber of contigs = ' + str(ctgCount) + '\ncombined length = ' + str(totalLen) + 'bp\nmax length = ' + str(ctgMax) + 'bp\nmin length = ' + str(ctgMin) + 'bp\naverage length = ' + str(ctgAvg) + 'bp\nmedian length = ' + str(ctgMed) + 'bp\nSD = ' + str(ctgStd) + '\nNs = ' + str(Ns) + '\nN25 = ' + N25 + '\nN50 = ' + N50 + '\nN75 = ' + N75 + '\n')
+    print('for ' + args.input + ':\nnumber of contigs = ' + str(ctgCount) + '\ncombined length = ' + str(totalLen) + 'bp\nmax length = ' + str(ctgMax) + 'bp\nmin length = ' + str(ctgMin) + 'bp\naverage length = ' + str(ctgAvg) + 'bp\nmedian length = ' + str(ctgMed) + 'bp\nSD = ' + str(ctgStd) + '\nNs = ' + str(Ns) + '\nN25 = ' + N25 + '\nN50 = ' + N50 + '\nN75 = ' + N75 + '\nL25 = ' + L25 + '\nL50 = ' + L50 + '\nL75 = ' + L75 + '\n')
     if bins:
         print('length ranges:')
         for i in range(12):
