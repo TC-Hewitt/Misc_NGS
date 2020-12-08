@@ -24,9 +24,9 @@ def main():
         show = False
     if args.bins in ['T', 't', 'True', 'true', 'TRUE']:
         bins = True
-        binLims = (0, 500, 1000, 2000, 5000, 8000, 12000, 20000, 40000, 60000, 100000, 200000, float('inf'))
-        binCounts = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0}
-        binDex = ('0-0.5kb', '0.5-1kb', '1-2kb', '2-5kb', '5-8kb', '8-12kb', '12-20kb', '20-40kb', '40-60kb', '60-100kb', '100-200kb', '200kb+')
+        binLims = (0, 500, 1000, 2000, 5000, 8000, 12000, 20000, 40000, 60000, 100000, 200000, 500000, 1000000, 3000000, 6000000, 10000000, 20000000, float('inf'))
+        binCounts = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0}
+        binDex = ('0-0.5Kb', '0.5-1Kb', '1-2Kb', '2-5Kb', '5-8Kb', '8-12Kb', '12-20Kb', '20-40Kb', '40-60Kb', '60-100Kb', '100-200Kb', '200-500Kb', '0.5-1Mb', '1-3Mb', '3-6Mb', '6-10Mb', '10-20Mb', '20Mb+')
     else:
         bins = False
     # Open FASTA.
@@ -41,7 +41,7 @@ def main():
                 ctgid = line.strip('\n')
                 if bins:
                     i = 0
-                    while i < 12:
+                    while i < 18:
                         if binLims[i] < seqLen <= binLims[i+1]:
                             binCounts[i] += 1
                             break
@@ -57,7 +57,7 @@ def main():
             print(ctgid.strip('>') + '\t' + str(len(tempSeq)) + '\n')
         if bins:
             i = 0
-            while i < 12:
+            while i < 18:
                 if binLims[i] < len(tempSeq) <= binLims[i+1]:
                     binCounts[i] += 1
                     break
@@ -106,7 +106,7 @@ def main():
     print('for ' + args.input + ':\nnumber of contigs = ' + str(ctgCount) + '\ncombined length = ' + str(totalLen) + 'bp\nmax length = ' + str(ctgMax) + 'bp\nmin length = ' + str(ctgMin) + 'bp\naverage length = ' + str(ctgAvg) + 'bp\nmedian length = ' + str(ctgMed) + 'bp\nSD = ' + str(ctgStd) + '\nNs = ' + str(Ns) + '\nN25 = ' + N25 + '\nN50 = ' + N50 + '\nN75 = ' + N75 + '\nL25 = ' + L25 + '\nL50 = ' + L50 + '\nL75 = ' + L75 + '\n')
     if bins:
         print('length ranges:')
-        for i in range(12):
+        for i in range(18):
             print(str(binDex[i]) + ' = ' + str(binCounts[i]))
         print('\n')
 
