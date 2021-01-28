@@ -14,6 +14,7 @@ def main():
     parser.add_argument('-t', '--table', help='provide txt file or blast tab output containing a list of contigs', required=False)
     parser.add_argument('-s', '--strid', help='identifier string before contig number. Default is <contig_> (only compatible if using -t)', default='contig_', type=str, required=False)
     parser.add_argument('-g', '--getnames', help='enter output file name to get a list of non-redundant contig names from <-t> input', required=False)
+    parser.add_argument('-v', '--invert', help='indicate True to retrieve contigs NOT in list provided by --table', default=False, type=bool, required=False)
     args = parser.parse_args()
 
     # Open FASTA.
@@ -66,14 +67,21 @@ def main():
         print(str(duplicates) + ' duplicates removed from list')  
 	print(str(num_queries) + ' unique contigs identified from ' + args.table)
         table_in.close()
-        print('searching for contigs in %s that match to contents of %s' % (args.input, args.table))
+        if not args.invert:
+            print('searching for contigs in %s that match to contents of %s' % (args.input, args.table))
+        else:
+            print('searching for contigs in %s that do not match to contents of %s' % (args.input, args.table))
 	p = re.compile(args.strid + '(\w+)[\.\\s,|]')
         
         for line in fasta_in:
             if line.startswith('>'):
 		matched = 0
                 try:
-                    if p.search(line).group(1) in query_hash:
+                    if not args.invert and p.search(line).group(1) in query_hash:
+                        fasta_out.write(line)
+                        count += 1
+                        matched = 1
+                    elif args.invert and p.search(line).group(1) not in query_hash:
                         fasta_out.write(line)
                         count += 1
                         matched = 1
@@ -83,7 +91,10 @@ def main():
                     pass
             elif matched == 1:
                 fasta_out.write(line)
-        print('Wrote %d contigs of %d listed in %s to %s' % (count, num_queries, args.table, args.output))
+        if not args.invert:
+            print('Wrote %d contigs of %d listed in %s to %s' % (count, num_queries, args.table, args.output))
+        else:
+            print('Wrote %d contigs not listed in %s to %s' % (count, args.table, args.output))
 
     elif not args.list and not args.table:
         print('error: please input either list of contigs (-l) or txt file containing list of contigs (-t)')
