@@ -29,3 +29,7 @@ maximum edit distance option (-n) for BWA (last tried with v0.7.17) does not see
 ```
 bwa sampe reference.fasta aln1.sai aln2.sai reads1.fq.gz reads2.fq.gz | python BWA_SAM_edit_dist_filter.py -n 2 | samtools view -hub -o output.bam - 
 ```
+
+**NoiseOutStats.py**
+
+get statistics from output files of Noisefinder.pyc (https://github.com/TC-Hewitt/MuTrigo)
