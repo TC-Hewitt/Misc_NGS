@@ -103,11 +103,11 @@ def main():
             break
 
 
-    print('for ' + args.input + ':\nnumber of contigs = ' + str(ctgCount) + '\ncombined length = ' + str(totalLen) + 'bp\nmax length = ' + str(ctgMax) + 'bp\nmin length = ' + str(ctgMin) + 'bp\naverage length = ' + str(ctgAvg) + 'bp\nmedian length = ' + str(ctgMed) + 'bp\nSD = ' + str(ctgStd) + '\nNs = ' + str(Ns) + '\nN25 = ' + N25 + '\nN50 = ' + N50 + '\nN75 = ' + N75 + '\nL25 = ' + L25 + '\nL50 = ' + L50 + '\nL75 = ' + L75 + '\n')
+    print('# for ' + args.input + ':\n# number of contigs = ' + str(ctgCount) + '\n# combined length = ' + str(totalLen) + 'bp\n# max length = ' + str(ctgMax) + 'bp\n# min length = ' + str(ctgMin) + 'bp\n# average length = ' + str(ctgAvg) + 'bp\n# median length = ' + str(ctgMed) + 'bp\n# SD = ' + str(ctgStd) + '\n# Ns = ' + str(Ns) + '\n# N25 = ' + N25 + '\n# N50 = ' + N50 + '\n# N75 = ' + N75 + '\n# L25 = ' + L25 + '\n# L50 = ' + L50 + '\n# L75 = ' + L75 + '\n#')
     if bins:
-        print('length ranges:')
+        print('# length ranges:')
         for i in range(18):
-            print(str(binDex[i]) + ' = ' + str(binCounts[i]))
+            print('# ' + str(binDex[i]) + ' = ' + str(binCounts[i]))
         print('\n')
 
 if __name__ == '__main__':

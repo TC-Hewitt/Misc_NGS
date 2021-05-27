@@ -9,13 +9,16 @@ def main():
     parser.add_argument('-i', '--input', nargs='?', type=argparse.FileType('r'), default=sys.stdin, help='indicate input.sam (leave out if using STDIN).')
     parser.add_argument('-n', '--nedit', help='indicate max edit distance allowed per read (default=10)', default=10, type=int, required=False)
     parser.add_argument('-f', '--format', help='indicate bwa algorithm used. options: mem, sampe', default="sampe", type=str, required=False)
+    parser.add_argument('-c', '--cust', help='indicate custom field (0-based) for edit distance flag (NM:i:). Overrides --format.', type=int, required=False)   
     args = parser.parse_args()
 
     SAMin = csv.reader(args.input, delimiter = '\t', quoting=csv.QUOTE_NONE)
 
-    if "mem" in args.format:
+    if args.cust:
+        nmfield = args.cust
+    elif "mem" in args.format and not args.cust:
         nmfield = 11
-    elif "sampe" in args.format:
+    elif "sampe" in args.format and not args.cust:
         nmfield = 12
 
     for row in SAMin:
