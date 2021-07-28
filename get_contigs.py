@@ -53,9 +53,9 @@ def main():
         print('populating list of queries...')
 
         #retrieve contigs from fasta_in based on list in args.table
-        search_term = '(' + args.strid + '\\w+)[\.\\s,|>]'
+        search_term = '(' + args.strid + '\\w+)[\.\\s,|>:;-]'
         query_get = re.findall(search_term, table_in.read())
-	query_raw = [re.sub(args.strid, '', x) for x in query_get]
+	query_raw = [re.sub(args.strid, '', x, count=1) for x in query_get]
 	query_set = list(set(query_raw))
         if args.getnames:
             namesOut = open(args.getnames, 'w+')
