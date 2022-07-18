@@ -33,7 +33,7 @@ def main():
 
         for line in fasta_in:
            if line.startswith('>'):
-	       if re.search(query_str, line):
+               if re.search(query_str, line):
                    print('found')
                    fasta_out.write(line)
                    count += 1
@@ -55,27 +55,27 @@ def main():
         #retrieve contigs from fasta_in based on list in args.table
         search_term = '(' + args.strid + '\\w+)[\.\\s,|>:;-]'
         query_get = re.findall(search_term, table_in.read())
-	query_raw = [re.sub(args.strid, '', x, count=1) for x in query_get]
-	query_set = list(set(query_raw))
+        query_raw = [re.sub(args.strid, '', x, count=1) for x in query_get]
+        query_set = list(set(query_raw))
         if args.getnames:
             namesOut = open(args.getnames, 'w+')
             [namesOut.write(args.strid + i + '\n') for i in sorted(query_set)]
             namesOut.close()
         num_queries = len(query_set)
-	duplicates = len(query_raw) - len(query_set)
+        duplicates = len(query_raw) - len(query_set)
         query_hash = set(query_set)
         print(str(duplicates) + ' duplicates removed from list')  
-	print(str(num_queries) + ' unique contigs identified from ' + args.table)
+        print(str(num_queries) + ' unique contigs identified from ' + args.table)
         table_in.close()
         if not args.invert:
             print('searching for contigs in %s that match to contents of %s' % (args.input, args.table))
         else:
             print('searching for contigs in %s that do not match to contents of %s' % (args.input, args.table))
-	p = re.compile(args.strid + '(\w+)[\.\\s,|]')
+        p = re.compile(args.strid + '(\w+)[\.\\s,|>:;-]')
         
         for line in fasta_in:
             if line.startswith('>'):
-		matched = 0
+                matched = 0
                 try:
                     if not args.invert and p.search(line).group(1) in query_hash:
                         fasta_out.write(line)
