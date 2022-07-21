@@ -30,11 +30,11 @@ def main():
     else:
         bins = False
     # Open FASTA.
-    with open(args.input, 'rU') as fastaIn:
-    	tempSeq = ''
+    with open(args.input, 'r') as fastaIn:
+        tempSeq = ''
         ctgid = 'null'
-	for line in fastaIn:
-    	    if line.startswith('>'):
+        for line in fastaIn:
+            if line.startswith('>'):
                 seqLen = len(tempSeq)
                 if show and seqLen >= args.show:
                     print(ctgid.strip('>') + '\t' + str(seqLen))
@@ -47,11 +47,11 @@ def main():
                             break
                         i += 1
                 ctgLens.append(seqLen)
-    		Ns += len(N.findall(tempSeq))
+                Ns += len(N.findall(tempSeq))
                 tempSeq = ''
             else:
                 tempSeq += p.sub('', line)
-    	ctgLens.append(len(tempSeq))
+        ctgLens.append(len(tempSeq))
         Ns += len(N.findall(tempSeq))
         if show and seqLen >= args.show:
             print(ctgid.strip('>') + '\t' + str(len(tempSeq)) + '\n')
@@ -62,7 +62,7 @@ def main():
                     binCounts[i] += 1
                     break
                 i += 1
-    	del(tempSeq)
+        del(tempSeq)
     
     ctgLens.pop(0)
     ctgLens.sort(reverse=True)

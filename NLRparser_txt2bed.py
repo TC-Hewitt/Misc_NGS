@@ -11,8 +11,8 @@ def main():
     parser.add_argument('-o', '--output', help='indicate output.bed', required=True)
     args = parser.parse_args()
     
-    file_in = open(args.input, 'rU')
-    file_out = open(args.output, 'wb')
+    file_in = open(args.input, 'r')
+    file_out = open(args.output, 'w')
     reader_in = csv.reader(file_in, delimiter = '\t')
     count = 0
     

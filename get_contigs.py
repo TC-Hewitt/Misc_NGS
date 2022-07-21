@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
 
     # Open FASTA.
-    fasta_in = open(args.input, 'rU')
+    fasta_in = open(args.input, 'r')
     count = 0
     matched = 0
 
@@ -48,7 +48,7 @@ def main():
         print('Wrote %d contigs found of %d inputs to %s.' % (count, len(args.list), args.output))
 
     elif args.table and not args.list:
-        table_in = open(args.table, 'rU')
+        table_in = open(args.table, 'r')
         fasta_out = open(args.output, 'w+')
         print('populating list of queries...')
 

@@ -27,7 +27,7 @@ def main():
             return False
 
     # parse input
-    Input = open(args.input, 'rU')
+    Input = open(args.input, 'r')
     Intab = csv.reader(Input, delimiter = '\t', quoting=csv.QUOTE_NONE)
     for row in Intab:
         try:

@@ -18,10 +18,10 @@ def main():
     args = parser.parse_args()
 
     # Open FASTA.
-    fasta_in = open(args.input, 'rU')
+    fasta_in = open(args.input, 'r')
 
     # Create FASTA output file.
-    fasta_out = open(args.output, 'wb')
+    fasta_out = open(args.output, 'w')
 
     # Start counter.
     if args.startn:
