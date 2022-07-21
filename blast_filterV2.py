@@ -1,6 +1,6 @@
 # Copyright (C) 2017 Timothy C. Hewitt - All Rights Reserved
 # You may use, distribute and modify this code under the terms of the GNU Public License version 3 (GPLv3)
-# You should have recieved a copy of the GPLv3 license with this file. If not, please write to timcharleshewitt@gmail.com or visit https://github.com/TC-Hewitt/MuTrigo
+# You should have recieved a copy of the GPLv3 license with this file. If not, please visit https://github.com/TC-Hewitt/MuTrigo
 
 #!/usr/bin/env python
 
