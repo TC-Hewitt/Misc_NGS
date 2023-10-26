@@ -73,3 +73,4 @@ for i in $(cut -d"-" -f1 rnacov_vs_modelsgff.overlaps.null.med10X.orfm.signalp4_
 do grep "$i;" rnacov_vs_modelsgff.overlaps.null.gff >> rnacov_vs_modelsgff.overlaps.null.signalp4.gff
 done
 ```
+Note this may not salvage all uncaptured secreted genes, especially if signal peptides span splice junctions - that is why it is quick and dirty. However, it had ~90% recovery in my tests.
